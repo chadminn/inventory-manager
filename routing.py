@@ -1,11 +1,11 @@
 import sqlite3
 import json
-from flask import Flask, jsonify, Response
-from flask import g
+from flask import Flask, jsonify, Response, request, g
 
 app = Flask(__name__)
 
 DATABASE = './inventory.db'
+
 
 def make_dicts(cursor, row):
     return dict((cursor.description[idx][0], value)
@@ -38,18 +38,24 @@ def remove():
 
 
 
-@app.route('/inventory/<id>', methods=['GET'])    #GET request that returns database records that match name or id number. 
-def inventory(id):
+@app.route('api/inventory', methods=['GET'])    #GET request that returns database records that match name or id number. 
+def inventory():
+    if 'id' in request.args:
+        id = request.args['id']
+    else:
+        return "Error: no id # or product name was provided."
+
     db = get_db()
     cur = db.cursor()
     cur.execute('select * from inv where id = ? or name = ? COLLATE NOCASE', (id, id))  #Case-insensitive search for either name or id.
     records = cur.fetchall()    #Fetch all the records retrieved from execute and place them in list of dicts (as specefied by make_dicts() fucntion.)
     data = json.dumps(records)  #Create json string with the list of records.
     cur.close()
+   
     return Response(data, mimetype = 'application/json')    #Format response using JSON MIME type so that the requesting application recognizes it.
 
 
-@app.route('/inventory/all', methods=['GET']) #Same functionality as '/requests/<id>' but instead it returns all records.
+@app.route('api/inventory/all', methods=['GET'])    #Same functionality as '/inventory' but instead it returns all records.
 def inventory_all():
     db = get_db()
     cur = db.cursor()
@@ -57,4 +63,5 @@ def inventory_all():
     records = cur.fetchall()
     data = json.dumps(records)
     cur.close()
+    
     return Response(data, mimetype = 'application/json')    
