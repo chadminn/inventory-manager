@@ -16,7 +16,7 @@ Setup
  
  * 	Installing dependencies (inside venv):  
  	```bash 
-	pip -r requirements.txt 
+	pip -r install requirements.txt 
 	```
 
  * 	Setting up the flask framework:  
