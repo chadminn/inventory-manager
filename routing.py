@@ -38,7 +38,7 @@ def remove():
 
 
 
-@app.route('api/inventory', methods=['GET'])    #GET request that returns database records that match name or id number. 
+@app.route('/api/inventory', methods=['GET'])    #GET request that returns database records that match name or id number. 
 def inventory():
     if 'id' in request.args:
         id = request.args['id']
@@ -55,7 +55,7 @@ def inventory():
     return Response(data, mimetype = 'application/json')    #Format response using JSON MIME type so that the requesting application recognizes it.
 
 
-@app.route('api/inventory/all', methods=['GET'])    #Same functionality as '/inventory' but instead it returns all records.
+@app.route('/api/inventory/all', methods=['GET'])    #Same functionality as '/inventory' but instead it returns all records.
 def inventory_all():
     db = get_db()
     cur = db.cursor()
