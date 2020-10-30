@@ -65,3 +65,37 @@ def inventory_all():
     cur.close()
     
     return Response(data, mimetype = 'application/json')    
+
+@app.route('/api/inventory/add', methods=['GET', 'POST']) #allow both GET and POST requests
+def add():
+    if request.method == 'POST':  #this block is only entered when the form is submitted
+        name = request.form.get('name')
+        stock = request.form.get('stock')
+        price = request.form.get('price')
+        insert(name, stock, price)
+        return '''<h1>The name is: {}</h1>
+                  <h1>The number in stock is: {}</h1>
+                  <h1>The price is ${}'''.format(name, stock, price)
+
+    return '''<form method="POST">
+                  Name: <input type="text" name="name"><br>
+                  Stock: <input type="text" name="stock"><br>
+                  Price: <input type="text" name="price"><br>
+                  <input type="submit" value="Submit"><br>
+              </form>'''
+
+def insert(name, stock, price):
+    try:
+        db = get_db()
+        cur = db.cursor()
+        insert_cmd = """INSERT INTO inv(name, stock, price)
+                          VALUES (?, ?, ?);"""
+
+        data = (name, stock, price)
+        cur.execute(insert_cmd, data)
+        db.commit();
+        return True
+    except Exception as e:
+        print("Problem inserting into db: " + str(e))
+        return False
+
