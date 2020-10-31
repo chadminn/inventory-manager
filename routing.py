@@ -63,11 +63,9 @@ def search(id):
     db = get_db()
     cur = db.cursor()
     cur.execute('select * from inv where id = ? or name = ? COLLATE NOCASE', (id, id))  #Case-insensitive search for either name or id.
-    records = cur.fetchall()    #Fetch all the records retrieved from execute and place them in list of dicts (as specefied by make_dicts() fucntion.)
-    data_json = json.dumps(records)  #Create json string with the list of records.
-    data_dict = json.loads(data_json)
+    data = cur.fetchall()    #Fetch all the records retrieved from execute and place them in list of dicts (as specefied by make_dicts() fucntion.)
     cur.close()
-    return records 
+    return data 
 
 @app.route('/api/inventory/all', methods=['GET'])    #Same functionality as '/inventory' but instead it returns all records.
 def inventory_all():
