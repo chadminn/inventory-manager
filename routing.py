@@ -26,15 +26,32 @@ def teardown_db(exception):
 
 
 
-@app.route('/commit/')  #TODO: add functionality for "commit" route
+@app.route('/put/')  #TODO: add functionality for "put" route
 def commit():
-    return "commit"
+    return "put"
 
 
 
-@app.route('/remove/')  #TODO: add functionality for "remove" route
+@app.route('/api/inventory/delete', methods=['DELETE']) 
 def remove():
-    return "remove"
+    if 'id' in request.args:
+        id = request.args['id']
+    else:
+        return "Error: no id # or name was provided.\n", 400
+        
+    try:
+        db = get_db()
+        cur = db.cursor()
+        cur.execute('DELETE FROM inv WHERE id = ? OR name = ? COLLATE NOCASE', (id, id))
+        db.commit()
+        if db.total_changes == 0:
+            return "Row not found for: " + id + '\n', 404
+        cur.close()
+        return "Succesfuly deleted row with: " + id + '\n'
+
+    except Exception as e:
+        return "Problem deleting db resource: " + str(e), 404
+         
 
 
 
