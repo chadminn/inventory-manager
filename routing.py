@@ -38,22 +38,36 @@ def remove():
 
 
 
-@app.route('/api/inventory', methods=['GET'])    #GET request that returns database records that match name or id number. 
+@app.route('/api/inventory', methods=['GET', 'POST'])    #GET request that returns database records that match name or id number. 
 def inventory():
-    if 'id' in request.args:
-        id = request.args['id']
-    else:
-        return "Error: no id # or product name was provided."
+    if request.method == 'POST':
+        id = request.form.get('id')
+        matches = search(id)
+        table = ""
+        for item in matches:
+            id = item['id']
+            name = item['name']
+            stock = item['stock']
+            price = item['price']
+            table += f"id: {id} name: {name} stock: {stock} price: {price}\n"
+        return table
 
+    return ''' <form method="POST">
+                    Name/ID: <input type="text" name="id"><br>
+                    <input type="submit" value="Submit"><br>
+               </form>'''
+   
+    return Response(data, mimetype = 'application/json')    #Format response using JSON MIME type so that the requesting application recognizes it.
+
+def search(id):
     db = get_db()
     cur = db.cursor()
     cur.execute('select * from inv where id = ? or name = ? COLLATE NOCASE', (id, id))  #Case-insensitive search for either name or id.
     records = cur.fetchall()    #Fetch all the records retrieved from execute and place them in list of dicts (as specefied by make_dicts() fucntion.)
-    data = json.dumps(records)  #Create json string with the list of records.
+    data_json = json.dumps(records)  #Create json string with the list of records.
+    data_dict = json.loads(data_json)
     cur.close()
-   
-    return Response(data, mimetype = 'application/json')    #Format response using JSON MIME type so that the requesting application recognizes it.
-
+    return records 
 
 @app.route('/api/inventory/all', methods=['GET'])    #Same functionality as '/inventory' but instead it returns all records.
 def inventory_all():
