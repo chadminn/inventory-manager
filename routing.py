@@ -57,8 +57,6 @@ def inventory():
                     <input type="submit" value="Submit"><br>
                </form>'''
    
-    return Response(data, mimetype = 'application/json')    #Format response using JSON MIME type so that the requesting application recognizes it.
-
 def search(id):
     db = get_db()
     cur = db.cursor()
