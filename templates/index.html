@@ -1,18 +1,25 @@
+<!DOCTYPE html> 
 <html>
 	
 	<head>
 		<title>Inventory</title>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 	</head>
 
-	<body>
+	<body class="content">
 		
 		<h1>Company Name</h1>
-		<form action="/search"> 
-			<input name="id">
-    		<input type="submit" value="Search">
-		</form>
-		
-		<table>
+		<div id="topbuttons">
+			<form id="search" action="/search"> 
+				<input name="id" class="field">
+    			<input type="submit" value="Search">
+			</form>
+			<form action='/' id="all">
+				<button>All</button>
+			</form>
+		</div>
+
+		<table id="inventory">
 			<thead>
 				<th>ID</th>
 				<th>Name</th>
@@ -31,16 +38,12 @@
         		{% endfor %} 
     		</tbody> 
 		</table>
-		<form action='/'>
-			<button>Reset</button>
-		</form>
-		<br>
-		<h3>Add An Item<h3>
-		<form method="POST" action="/add">
-        	Name: <input type="text" name="name"><br>
-        	Stock: <input type="text" name="stock"><br>
-        	Price: <input type="text" name="price"><br>
-        	<input type="submit" value="Submit"><br>
+		
+		<form id="add" method="POST" action="/add">
+        	<input type="text" name="name" placeholder="Name">
+        	<input type="text" name="price" placeholder="Price">
+        	<input type="text" name="stock" placeholder="Stock">
+        	<button type="submit" value="Submit">Add</button><br>
 		</form>
 	
 	</body>
