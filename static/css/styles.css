@@ -1,0 +1,50 @@
+.content {
+	margin: auto;
+	max-width: 750px;
+}
+
+#topbuttons {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+
+#search {
+	margin: 0px 0px 20px 0px;
+	display: inline-block;
+}
+
+#all {
+	display: inline-block;
+}
+
+#inventory {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+#inventory td, #inventory th {
+	border: 1px solid #ddd;
+	padding: 6px;
+}
+
+#inventory tr td:last-child {
+	border: none;
+}
+
+#inventory button {
+	font-weight: bold;
+	font-size: large;
+	border-radius: 8px;
+	padding: 5px 5px;
+	display: inline-block;
+	background-color: indianred;
+}
+
+#add {
+	margin-top: 20px;
+}
+
+#add input {
+	margin-right: 5px;
+}
