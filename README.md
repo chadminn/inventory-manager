@@ -8,20 +8,9 @@ Our goal was to create an application to keep track of inventory for a retail st
 Docker 
 ------
 
- * Build Docker images from Dockerfiles:
+ * Build and run Docker images
    ```bash
-   docker build routing -t routing &&
-   docker build webapp -t webapp
-   ```
-
- * Run the API image as a container
-   ```bash
-   docker run -d --name=routing --net=host routing
-   ```
-
- * Run the wepapp image as a container
-   ```bash
-   docker run -d --name=webapp --new=host webapp
+    make docker
    ```
    
 Usage
@@ -33,36 +22,24 @@ Usage
 * Each item has a red 'X' button next to it which will delete the item from the database.
 * More items can be added to the database at the bottom of the inventory table.
 
+* Our API accepts HTTP form data. Sending a POST request to http://127.0.0.1:5000/api/inventory/echo with form data will return with your sent data and print to stdout. To test this, you must send form-data in a POST Request. Example:
 
-   
+| key | value |
+|---|---|
+| name | chips |
+| stock | 100 |
+| price | 2.99 |
+  
 
 Local Testing (Without Containers)
 -------------
 
- *  Setting up the python virtual envioronment (Within /inventory-manager directory):
+ *  Build the server locally:
     ```bash
-    python3 -m venv venv
+    make build
     ```
 
- *  Running venv:
+ *  Run the server locally:
     ```bash
-    source venv/bin/activate
-    ```
-
- *  Installing dependencies (inside venv):
-    ```bash
-    pip -r install requirements.txt
-    ```
-
- *  Running the API (Within /routing directory):
-    ```bash
-    python3 routing.py
-    ```
-
- * Running the webapp (Within /inventory-manager directory)
-   ```bash
-   python3 webapp/webapp.py
-   ```
-
-
- 
+    make run
+  
