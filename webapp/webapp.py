@@ -32,3 +32,7 @@ def add():
     requests.post('http://127.0.0.1:5000/api/inventory/add', data = obj)
     return render()
 
+
+if __name__=='__main__':
+    app.run(debug=False,port=int('5001'))
+    

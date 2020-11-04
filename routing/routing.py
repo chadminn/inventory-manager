@@ -116,3 +116,5 @@ def insert(name, stock, price):
         print("Problem inserting into db: " + str(e))
         return False
 
+if __name__ == '__main__':
+    app.run(debug=False)

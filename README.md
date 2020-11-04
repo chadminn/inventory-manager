@@ -1,36 +1,59 @@
 # Inventory Manager
 
 
-Setup
------
+Docker 
+------
 
- * 	Setting up the python virtual enviornment:  
- 	```bash
- 	python3 -m venv venv 
- 	```
+ * Build Docker images from Dockerfiles:
+   ```bash
+   docker build routing -t routing &&
+   docker build webapp -t webapp
+   ```
 
- * 	Running venv:  
- 	```bash 
-	source venv/bin/activate 
-	```
- 
- * 	Installing dependencies (inside venv):  
- 	```bash 
-	pip -r install requirements.txt 
-	```
+ * Run the API image as a container
+   ```bash
+   docker run -d --name=routing --net=host routing
+   ```
 
- * 	Setting up the flask framework:  
- 	```bash 
-	export FLASK_APP=routing.py 
-	``` 
+ * Run the wepapp image as a container
+   ```bash
+   docker run -d --name=webapp --new=host webapp
+   ```
 
- * 	Running the API:  
- 	```bash 
-	flask run 
-	```
 
 
 Before you commit
 -----------------
 
  * 	Make sure you put unnecessary files in the .gitignore file
+
+
+
+Local Testing (Without Containers)
+-------------
+
+ *  Setting up the python virtual enviornment (Within /inventory-manager directory):
+    ```bash
+    python3 -m venv venv
+    ```
+
+ *  Running venv:
+    ```bash
+    source venv/bin/activate
+    ```
+
+ *  Installing dependencies (inside venv):
+    ```bash
+    pip -r install requirements.txt
+    ```
+
+ *  Running the API (Within /routing directory):
+    ```bash
+    python3 routing.py
+    ```
+
+ * Running the webapp (Within /inventory-manager directory)
+   ```bash
+   python3 webapp/webapp.py
+   ```
+
