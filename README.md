@@ -17,7 +17,7 @@ Docker
 
  * Run the wepapp image as a container
    ```bash
-   docker run -d --name=webapp --new=host webapp
+   docker run -d --name=webapp --net=host webapp
    ```
 
 
