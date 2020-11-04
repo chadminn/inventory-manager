@@ -5,7 +5,7 @@
 #Build docker images and construct the containers
 docker:
 	docker build routing -t routing && docker build webapp -t webapp
-	docker run -d --name=routing --net=host webapp
+	docker run -d --name=routing --net=host routing
 	docker run -d --name=webapp --net=host webapp
 
 
