@@ -1,36 +1,6 @@
 # Inventory Manager
 
-
-Setup
------
-
- * 	Setting up the python virtual enviornment:  
- 	```bash
- 	python3 -m venv venv 
- 	```
-
- * 	Running venv:  
- 	```bash 
-	source venv/bin/activate 
-	```
+ # Description
  
- * 	Installing dependencies (inside venv):  
- 	```bash 
-	pip -r install requirements.txt 
-	```
-
- * 	Setting up the flask framework:  
- 	```bash 
-	export FLASK_APP=routing.py 
-	``` 
-
- * 	Running the API:  
- 	```bash 
-	flask run 
-	```
-
-
-Before you commit
------------------
-
- * 	Make sure you put unnecessary files in the .gitignore file
+Our goal was to create an application to keep track of inventory for a retail store. We used Flask and Python to implement a RESTful API that interacts with a SQLite Database. We have two Flask applications: one for the backend/API and one for our frontend/UI. 
+ 
