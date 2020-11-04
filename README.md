@@ -34,12 +34,12 @@ Usage
 Local Testing (Without Containers)
 -------------
 
- *  Build the server locally:
+ *  Build the API locally:
     ```bash
     make build
     ```
 
- *  Run the server locally:
+ *  Run the API locally:
     ```bash
     make run
   
