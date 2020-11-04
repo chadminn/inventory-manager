@@ -5,25 +5,22 @@ FROM ubuntu:16.04
 
 #Update package and install python3 and pip in order to install the packages
 # listed in "requirements.txt"
-RUN apt-get update -y && \
-    apt-get install -y python3-pip python3-dev
+RUN apt-get update -y
+RUN apt-get install -y python3-pip python3-dev
 
 #Copy requirements.txt from host to build dependency image before the actual 
 # application image layer that will likely change frequently
-COPY ./requirements.txt /requirements.txt
+COPY requirements.txt /app/requirements.txt
 
 #Set working directory of container
-WORKDIR /
+WORKDIR /app
 
 #Build dependency image
 RUN pip3 install -r requirements.txt
 
 #Copy application files from host after dependency image is generated
-COPY . /
-
-#Set the entrypoint for the api
-ENTRYPOINT ["python3"]
+COPY . /app
 
 #Runs the api
-CMD ["routing.py"]
+CMD ["python3","routing.py"]
 

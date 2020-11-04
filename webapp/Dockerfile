@@ -10,16 +10,16 @@ RUN apt-get update -y && \
 
 #Copy requirements.txt from host to build dependency image before the actual 
 # application image layer that will likely change frequently
-COPY ./requirements.txt /requirements.txt
+COPY requirements.txt /app/requirements.txt
 
 #Set working directory of container
-WORKDIR /
+WORKDIR /app/
 
 #Build dependency image
 RUN pip3 install -r requirements.txt
 
 #Copy application files from host after dependency image is generated
-COPY . /
+COPY . /app/
 
 #Set the entrypoint for the api
 ENTRYPOINT ["python3"]
