@@ -25,6 +25,15 @@ def teardown_db(exception):
         db.close()
 
 
+@app.route('/api/inventory/echo', methods=['POST'])
+def echo():
+    name = request.form.get('name',"")
+    stock = request.form.get('stock', "")
+    price = request.form.get('price', "")
+    print("Name: " + name + "\nStock: " + stock + "\nPrice: " + price)
+    return "Name: " + name + "\nStock: " + stock + "\nPrice: " + price
+
+
 
 @app.route('/put/')  #TODO: add functionality for "put" route
 def commit():
@@ -116,3 +125,5 @@ def insert(name, stock, price):
         print("Problem inserting into db: " + str(e))
         return False
 
+if __name__ == '__main__':
+    app.run(debug=False)
