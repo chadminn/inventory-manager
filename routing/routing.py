@@ -117,4 +117,4 @@ def insert(name, stock, price):
         return False
 
 if __name__ == '__main__':
-    app.run(debug=False,host='0.0.0.0')
+    app.run(debug=False)
