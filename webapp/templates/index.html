@@ -31,12 +31,12 @@
             		<tr> 
                 		<td>{{row['id']}}</td> 
                 		<td>{{row['name']}}</td> 
-						<td>{{row['price']}}</td>
+						<td>{{"$%.2f" | format(row['price'])}}</td>
 						<td>{{row['stock']}}</td>
 						<td> <form  action="/delete"> <button type="submit" value={{row['id']}} name="id"> X </button> </form> </td>
             		</tr> 
         		{% endfor %} 
-    		</tbody> 
+    		</tbody>
 		</table>
 		
 		<form id="add" method="POST" action="/add">
@@ -45,6 +45,8 @@
         	<input type="text" name="stock" placeholder="Stock">
         	<button type="submit" value="Submit">Add</button><br>
 		</form>
+
+		{% block input_error %}{% endblock %}
 	
 	</body>
 
