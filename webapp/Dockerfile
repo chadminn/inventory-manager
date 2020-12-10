@@ -22,8 +22,8 @@ RUN pip3 install -r requirements.txt
 COPY . /app/
 
 #Set the entrypoint for the api
-ENTRYPOINT ["python3"]
+ENTRYPOINT ["python3", "webapp.py", "-p", "8080"]
 
 #Runs the api
-CMD ["webapp.py"]
+#CMD ["webapp.py", "-p", "8080"]
 
