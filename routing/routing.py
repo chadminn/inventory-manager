@@ -126,4 +126,4 @@ def insert(name, stock, price):
         return False
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=False, port=5000)

@@ -21,6 +21,8 @@ RUN pip3 install -r requirements.txt
 #Copy application files from host after dependency image is generated
 COPY . /app
 
+
+EXPOSE 5000
 #Runs the api
-CMD ["python3","routing.py"]
+CMD ["python3","routing.py", "-p", "5000"]
 
